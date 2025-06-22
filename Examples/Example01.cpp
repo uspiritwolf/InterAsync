@@ -5,34 +5,57 @@ struct A
 {
 	int a = 0;
 
-	A(int a)
+	A()
 	{
-		std::cout << "A constructed\n";
+		std::cout << this << " A default constructed\n";
 	}
 
-	A(const A&) = default;
+	A(int a)
+		: a(a)
+	{
+		std::cout << this << " A constructed: " << a << "\n";
+	}
+
+	A(const A&) = delete;
+	A& operator=(const A&) = delete;
 
 	A(A&& other) noexcept
 		: a(other.a)
 	{
-		other.a = 0; // Reset the moved-from object
-		std::cout << "A moved\n";
+		other.a = -1; // Reset the moved-from object
+		std::cout << this << " A moved: " << a << "\n";
+	}
+
+	A& operator=(A&& other) noexcept
+	{
+		if (this != &other)
+		{
+			a = other.a;
+			other.a = -1; // Reset the moved-from object
+			std::cout << this << " A move assigned: " << a << "\n";
+		}
+		return *this;
 	}
 
 	~A()
 	{
-		std::cout << "A destructed " << a << "\n";
+		std::cout << this << " A destructed: " << a << "\n";
 	}
 };
 
-ia::Task<void> ExampleTask(A a)
+ia::Task<int> ExampleTask(A&& a)
 {
-	co_return;
+	std::cout << "ExampleTask started\n";
+	std::cout << "A value: " << a.a << "\n";
+
+	co_return a.a + 42;
 }
 
 void test()
 {
 	auto task = ExampleTask(A(100));
+
+	std::cout << "Result: " << task.get() << "\n";
 }
 
 int main()
