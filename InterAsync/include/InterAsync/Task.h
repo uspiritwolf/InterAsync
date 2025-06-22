@@ -45,6 +45,12 @@ public:
 		return state_ && state_->is_ready();
 	}
 
+	auto& get()
+		requires(not std::is_void_v<ReturnType>)
+	{
+		return state_->get_value();
+	}
+
 private:
 	std::shared_ptr<CoroState> state_;
 };

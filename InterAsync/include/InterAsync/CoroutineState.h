@@ -27,6 +27,11 @@ public:
 		return value_ != std::nullopt;
 	}
 
+	ValueType& get_value()
+	{
+		return *value_;
+	}
+
 private:
 	std::optional<ValueType> value_;
 };
