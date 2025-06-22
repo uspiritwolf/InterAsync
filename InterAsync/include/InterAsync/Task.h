@@ -8,12 +8,12 @@ BEGIN_PUBLIC_INTER_ASYNC_NAMESPACE
 template <typename ReturnType>
 class Task
 {
-	using CoroState = details::CoroutineState<ReturnType>;
+	using CoroutineState = details::CoroutineState<ReturnType>;
 
 public:
 	using promise_type = details::Promise<ReturnType>;
 
-	Task(std::shared_ptr<CoroState> frame)
+	Task(std::shared_ptr<CoroutineState> frame)
 		: state_(std::move(frame))
 	{
 	}
@@ -52,7 +52,7 @@ public:
 	}
 
 private:
-	std::shared_ptr<CoroState> state_;
+	std::shared_ptr<CoroutineState> state_;
 };
 
 END_PUBLIC_INTER_ASYNC_NAMESPACE

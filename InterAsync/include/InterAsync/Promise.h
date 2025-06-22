@@ -36,8 +36,8 @@ class Promise : public PromiseValue<ValueType>
 {
 	friend class CoroutineState<ValueType>;
 
-	using CoroHandle = std::coroutine_handle<Promise>;
-	using CoroState = CoroutineState<ValueType>;
+	using CoroutineHandle = std::coroutine_handle<Promise>;
+	using CoroutineState = CoroutineState<ValueType>;
 
 public:
 	Promise() = default;
@@ -69,7 +69,7 @@ public:
 		std::terminate();
 	}
 
-	CoroState& get_state() const
+	CoroutineState& get_state() const
 	{
 		if (!state_)
 		{
@@ -78,18 +78,18 @@ public:
 		return *state_;
 	}
 
-	CoroHandle get_handle()
+	CoroutineHandle get_handle()
 	{
-		return CoroHandle::from_promise(*this);
+		return CoroutineHandle::from_promise(*this);
 	}
 
-	std::shared_ptr<CoroState> get_return_object()
+	std::shared_ptr<CoroutineState> get_return_object()
 	{
-		return CoroState::create_shared_ptr(get_handle());
+		return CoroutineState::create_shared_ptr(get_handle());
 	}
 
 private:
-	CoroState* state_ = nullptr;
+	CoroutineState* state_ = nullptr;
 };
 
 END_DETAILS_INTER_ASYNC_NAMESPACE
