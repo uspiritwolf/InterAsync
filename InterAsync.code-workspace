@@ -1,0 +1,48 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"C_Cpp.intelliSenseEngine": "disabled",
+		"cmake.copyCompileCommands": "${workspaceFolder}/.build/compile_commands.json",
+		"clangd.enable": true,
+		"clangd.arguments": [
+			"--background-index",
+			"--compile-commands-dir=${workspaceFolder}/.build"
+		],
+		"editor.insertSpaces": false,
+		"editor.detectIndentation": false,
+		"editor.formatOnSave": true,
+		"C_Cpp.clang_format_style": "file",
+		"files.eol": "\n"
+	},
+	"launch": {
+		"version": "0.2.0",
+		"configurations": [
+			{
+				"name": "Launch (Windows) ",
+				"type": "cppvsdbg",
+				"request": "launch",
+				"program": "${command:cmake.launchTargetPath}",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${fileDirname}",
+				"environment": [],
+				"console": "integratedTerminal"
+			},
+			{
+				"name": "Launch (Linux)",
+				"type": "cppdbg",
+				"request": "launch",
+				"program": "${command:cmake.launchTargetPath}",
+				"args": [],
+				"stopAtEntry": false,
+				"cwd": "${fileDirname}",
+				"environment": [],
+				"MIMode": "${defaultMIMode}"
+			}
+		]
+	}
+}
