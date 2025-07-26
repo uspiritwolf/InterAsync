@@ -2,6 +2,7 @@
 #include <InterAsync/Core.h>
 #include <InterAsync/CoroutineState.h>
 #include <coroutine>
+#include <exception>
 #include <memory>
 
 BEGIN_DETAILS_INTER_ASYNC_NAMESPACE
